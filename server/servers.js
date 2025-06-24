@@ -4,8 +4,10 @@
 
 const cluster = require("cluster"); // makes it so we can use multiple threads and doesn't change the nature of node
 const http = require("http");
-const {Server} = require("socket.io");
 const numCPUs = require("os").cpus().length;
+const socketMain = require("./socketMain");
+
+const {Server} = require("socket.io");
 const {setupMaster, setupWorker} = require("@socket.io/sticky"); // sticky makes it so a client can find its way back to the correct worker
 const {createAdapter, setupPrimary} = require("@socket.io/cluster-adapter"); // makes it so the primary node can emit to everyone
 
@@ -60,8 +62,6 @@ if (cluster.isMaster) {
   // setup connection with the primary process
   setupWorker(io);
 
-  io.on("connection", (socket) => {
-    console.log(`Someone connected on worker ${process.pid}`);
-    socket.emit("welcome", "Welcome to cluster driver socket.io server.");
-  });
+  // this is where emits and listeners happen.
+  socketMain(io);
 }

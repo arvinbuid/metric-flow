@@ -1,5 +1,13 @@
 const os = require("os");
 
+// initialize socket connection to server
+const io = require("socket.io-client");
+const socket = io("http://localhost:3000");
+
+socket.on("connect", () => {
+  console.log("node client connected!");
+});
+
 // total memory
 const totalMem = os.totalmem();
 
