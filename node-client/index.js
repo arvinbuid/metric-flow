@@ -5,7 +5,20 @@ const io = require("socket.io-client");
 const socket = io("http://localhost:3000");
 
 socket.on("connect", () => {
-  console.log("node client connected!");
+  // console.log("node client connected!");
+  // identify this machine to the server for front-end usage
+  const nI = os.networkInterfaces(); // list of all network interfaces in this machine
+  // console.log(nI);
+  let macA;
+  for (const key in nI) {
+    const isNetworkFacing = !nI[key][0].internal;
+    if (isNetworkFacing) {
+      // there is a mac address that can be use.
+      macA = nI[key][0].mac;
+      break;
+    }
+  }
+  console.log(macA);
 });
 
 // total memory
