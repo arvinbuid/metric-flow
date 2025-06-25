@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import canvasLoadAnimation from '../utils/canvasLoadAnimation'
 
 interface MemoryProps {
@@ -12,7 +12,12 @@ interface MemoryProps {
 const Memory = ({ memData }: MemoryProps) => {
     const { freeMem, totalMem, memUsage } = memData;
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    canvasLoadAnimation(canvasRef.current, memUsage * 100);
+
+    useEffect(() => {
+        if (canvasRef.current) {
+            canvasLoadAnimation(canvasRef.current, memUsage * 100);
+        }
+    }, [memUsage])
 
     const binaryGB = 1073741824
     const totalMemInGB = Math.floor(totalMem / binaryGB * 100) / 100;

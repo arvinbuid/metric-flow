@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import canvasLoadAnimation from '../utils/canvasLoadAnimation'
 
 interface CpuProps {
@@ -8,9 +8,14 @@ interface CpuProps {
 }
 
 const Cpu = ({ cpuData }: CpuProps) => {
-    const canvasRef = useRef<HTMLCanvasElement>(null);
     const { cpuLoad } = cpuData;
-    canvasLoadAnimation(canvasRef.current, cpuLoad);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+        if (canvasRef.current) {
+            canvasLoadAnimation(canvasRef.current, cpuLoad);
+        }
+    }, [cpuLoad])
 
     return (
         <div className="flex flex-col gap-4">

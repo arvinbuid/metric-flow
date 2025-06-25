@@ -28,7 +28,8 @@ const drawCircle = (canvas: HTMLCanvasElement | null, currentLoad: number) => {
       context.strokeStyle = "#d9534f";
     }
     context.beginPath();
-    context.arc(100, 100, 95, Math.PI * 1.5, (Math.PI * 2 * currentLoad) / 100 + Math.PI * 1.5);
+    context.arc(100, 100, 95, Math.PI * 1.5, (Math.PI * 2 * currentLoad) / 100);
+    // Math.PI * 1.5 + (Math.PI * 2 * (currentLoad / 100))
     context.stroke();
   }
 };
