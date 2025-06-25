@@ -1,4 +1,4 @@
-const drawCircle = (canvas: HTMLCanvasElement, currentLoad: number) => {
+const drawCircle = (canvas: HTMLCanvasElement | null, currentLoad: number) => {
   if (canvas) {
     const context = canvas.getContext("2d");
 

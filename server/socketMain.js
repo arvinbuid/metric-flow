@@ -22,8 +22,8 @@ const socketMain = (io) => {
 
     // listen to perfData event
     socket.on("perfData", (data) => {
-      console.log("tick...");
-      console.log(data);
+      // console.log("tick...");
+      // console.log(data);
       io.to("reactClient").emit("perfData", data);
     });
   });
