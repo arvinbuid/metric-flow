@@ -25,17 +25,20 @@ function App() {
   const [performanceData, setPerformanceData] = useState<PerformanceData>({}); // performance data is {}, not []
 
   useEffect(() => {
-    socket.on('perfData', (data: SinglePerformanceData) => {
+    const updatePerformanceData = (data: SinglePerformanceData) => {
+      const { macA } = data;
       setPerformanceData((prevPerformanceData) => {
         return {
           ...prevPerformanceData,
-          [data.macA]: data, // Store the new data using its macA as the key
+          [macA]: data, // Store the new data using its macA as the key
         };
       });
-    })
+    }
+
+    socket.on('perfData', updatePerformanceData);
 
     // Cleanup
-    return () => { socket.off('perfData') }
+    return () => { socket.removeListener('perfData', updatePerformanceData) }
   }, [])
 
   const widgets = Object.values(performanceData).map((data) => (

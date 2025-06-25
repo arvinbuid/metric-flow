@@ -4,6 +4,7 @@
 const socketMain = (io) => {
   io.on("connection", (socket) => {
     const auth = socket.handshake.auth;
+    let machineMacAddress;
 
     // join room if valid token
     if (auth.token === "nodeclienttoken") {
@@ -22,9 +23,16 @@ const socketMain = (io) => {
 
     // listen to perfData event
     socket.on("perfData", (data) => {
-      // console.log("tick...");
-      // console.log(data);
+      if (!machineMacAddress) {
+        machineMacAddress = data.macA;
+        io.to("reactClient").emit("connectedOrNot", {isAlive: true, machineMacAddress});
+      }
       io.to("reactClient").emit("perfData", data);
+    });
+
+    socket.on("disconnect", () => {
+      // nodeClient just disconnected, let the frontend know.
+      io.to("reactClient").emit("connectedOrNot", {isAlive: false, machineMacAddress});
     });
   });
 };
