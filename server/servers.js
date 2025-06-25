@@ -63,5 +63,5 @@ if (cluster.isMaster) {
   setupWorker(io);
 
   // this is where emits and listeners happen.
-  socketMain(io);
+  socketMain(io, process.pid);
 }

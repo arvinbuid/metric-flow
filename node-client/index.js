@@ -19,7 +19,7 @@ socket.on("connect", () => {
     const isNetworkFacing = !nI[key][0].internal;
     if (isNetworkFacing) {
       // there is a mac address that can be use.
-      macA = nI[key][0].mac;
+      macA = nI[key][0].mac + Math.floor(Math.random() * 100000); // allow to differentiate locally
       break;
     }
   }
