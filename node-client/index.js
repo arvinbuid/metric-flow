@@ -2,7 +2,12 @@ const os = require("os");
 
 // initialize socket connection to server
 const io = require("socket.io-client");
-const socket = io("http://localhost:3000");
+const options = {
+  auth: {
+    token: "nodeclienttoken",
+  },
+};
+const socket = io("http://localhost:3000", options);
 
 socket.on("connect", () => {
   // console.log("node client connected!");
@@ -18,7 +23,18 @@ socket.on("connect", () => {
       break;
     }
   }
-  console.log(macA);
+
+  const perfDataInterval = setInterval(async () => {
+    // call performanceLoadData every second
+    const perfData = await performanceLoadData();
+    perfData.macA = macA; // append mac address
+    socket.emit("perfData", perfData); // send to socket server (http://localhost:3000)
+  }, 1000);
+
+  // stop ticking when disconnected
+  socket.on("disconnect", () => {
+    clearInterval(perfDataInterval);
+  });
 });
 
 // total memory
