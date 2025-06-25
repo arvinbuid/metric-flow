@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import socket from "./socketConnection"
+import socket from "./utils/socketConnection"
 import Widget from "./components/Widget";
 
 export interface SinglePerformanceData {
@@ -45,9 +45,9 @@ function App() {
   ))
 
   return (
-    <>
+    <main className="max-w-6xl mx-auto px-6 py-8">
       {widgets}
-    </>
+    </main>
   )
 }
 
