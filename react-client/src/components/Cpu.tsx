@@ -22,7 +22,7 @@ const Cpu = ({ cpuData }: CpuProps) => {
             <h3 className="text-xl text-center">CPU Load</h3>
             <div className="relative mt-4">
                 <canvas ref={canvasRef} width={200} height={200} className="mx-auto"></canvas>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold">{cpuLoad}</div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold text-[#2d384a]">{cpuLoad}</div>
             </div>
         </div >
     );

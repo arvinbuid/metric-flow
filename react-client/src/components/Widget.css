@@ -1,0 +1,102 @@
+:root {
+  --pointer-x: 50%;
+  --pointer-y: 50%;
+  --card-opacity: 0;
+  --rotate-x: 0deg;
+  --rotate-y: 0deg;
+  --background-x: 50%;
+  --background-y: 50%;
+  --card-radius: 20px;
+}
+
+.widget-card-wrapper {
+  perspective: 500px;
+  transform: translate3d(0, 0, 0.1px);
+  position: relative;
+  border-radius: var(--card-radius);
+}
+
+/* Outer border/glow effect */
+.widget-card-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 125px; /* glow spread rate */
+  background: inherit;
+  background-position: inherit;
+  border-radius: inherit;
+  transition: all 0.5s ease;
+  filter: contrast(2) saturate(2) blur(40px);
+  transform: scale(0.8) translate3d(0, 0, 0.1px);
+  background-size: 100% 100%;
+
+  /* Outer glow color */
+  background-image: radial-gradient(
+      farthest-side circle at var(--pointer-x) var(--pointer-y),
+      hsla(266, 100%, 90%, var(--card-opacity)) 4%,
+      hsla(266, 50%, 80%, calc(var(--card-opacity) * 0.75)) 10%,
+      hsla(266, 25%, 70%, calc(var(--card-opacity) * 0.5)) 50%,
+      hsla(266, 0%, 60%, 0) 100%
+    ),
+    radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%),
+    radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%),
+    conic-gradient(
+      from 124deg at 50% 50%,
+      #c137ffff 0%,
+      #07c6ffff 40%,
+      #07c6ffff 60%,
+      #c137ffff 100%
+    );
+}
+
+.widget-card-wrapper:hover,
+.widget-card-wrapper.active {
+  --card-opacity: 1;
+}
+
+.widget-card-wrapper:hover::before,
+.widget-card-wrapper.active::before {
+  filter: contrast(1) saturate(2) blur(40px) opacity(1);
+  transform: scale(1.05) translate3d(0, 0, 0.1px);
+}
+
+.widget-card {
+  border-radius: var(--card-radius);
+  position: relative;
+  background-blend-mode: color-dodge, normal, normal, normal;
+  box-shadow: rgba(0, 0, 0, 0.8) calc((var(--pointer-from-left) * 10px) - 3px)
+    calc((var(--pointer-from-top) * 20px) - 6px) 20px -5px;
+  transition: transform 1s ease; /* For tilt if you enable it */
+  transform: translate3d(0, 0, 0.1px) rotateX(var(--rotate-y)) rotateY(var(--rotate-x));
+  background-size: 100% 100%;
+  background-position: 0 0, 0 0, 50% 50%, 0 0;
+
+  /* These gradients create the 'border' appearance around the main content */
+  background-image: radial-gradient(
+      farthest-side circle at var(--pointer-x) var(--pointer-y),
+      hsla(266, 100%, 90%, var(--card-opacity)) 4%,
+      hsla(266, 50%, 80%, calc(var(--card-opacity) * 0.75)) 10%,
+      hsla(266, 25%, 70%, calc(var(--card-opacity) * 0.5)) 50%,
+      hsla(266, 0%, 60%, 0) 100%
+    ),
+    radial-gradient(35% 52% at 55% 20%, #00ffaac4 0%, #073aff00 100%),
+    radial-gradient(100% 100% at 50% 50%, #00c1ffff 1%, #073aff00 76%),
+    conic-gradient(
+      from 124deg at 50% 50%,
+      #c137ffff 0%,
+      #07c6ffff 40%,
+      #07c6ffff 60%,
+      #c137ffff 100%
+    );
+  overflow: hidden;
+}
+
+/* Inner card background */
+.widget-inside {
+  position: absolute;
+  inset: 1px;
+  border-radius: calc(var(--card-radius) - 1px);
+  background-image: linear-gradient(170deg, #60496e8c 0%, #71c4ff44 100%); /* Inner gradient */
+  background-color: rgba(0, 0, 0, 0.9); /* Inner background color */
+  transform: translate3d(0, 0, 0.01px);
+  z-index: 1;
+}

@@ -5,29 +5,11 @@
   font-family: "Inter", sans-serif;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
+  color: rgba(255, 255, 255, 0.9);
   background-color: #242424;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-}
-
-.widget {
-  margin-bottom: 25px;
-  border-bottom: 3px solid black;
-  background-image: linear-gradient(transparent, #000), linear-gradient(transparent, #000);
-  background-size: 3px 100%;
-  background-position: 0 0, 100% 0;
-  background-repeat: no-repeat;
-  padding-bottom: 20px;
-  position: relative;
 }

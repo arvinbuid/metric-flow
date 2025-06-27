@@ -28,7 +28,7 @@ const Memory = ({ memData }: MemoryProps) => {
             <h3 className="text-xl text-center">Memory Usage</h3>
             <div className="relative mt-4">
                 <canvas ref={canvasRef} width={200} height={200} className="mx-auto"></canvas>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl font-bold">{Math.round(memUsage * 100)}%</div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl text-[#2d384a] font-bold">{Math.round(memUsage * 100)}%</div>
             </div>
             <div className="text-center mt-2">
                 {/* Total Memory */}
