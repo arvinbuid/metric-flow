@@ -37,9 +37,9 @@ const Widget = ({ data }: PerformanceData) => {
 
     return (
         <>
-            <div className="widget">
+            <div className="widget mt-8">
                 {notAliveDiv}
-                <div className="grid grid-cols-3 max-w-4xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-6 max-w-4xl mx-auto space-y-4">
                     <Cpu cpuData={cpuData} />
                     <Memory memData={memData} />
                     <Info infoData={infoData} />

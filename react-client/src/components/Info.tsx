@@ -14,7 +14,7 @@ interface InfoProps {
 const Info = ({ infoData }: InfoProps) => {
     const { osType, uptime, cpuType, cpuSpeed, numCores } = infoData;
     return (
-        <div className="cpu-info space-y-4">
+        <div className="cpu-info space-y-4 text-center">
             <h3 className="text-2xl font-semibold">Operating System</h3>
             <div>{osType}</div>
             <h3 className="text-2xl font-semibold">Time Online</h3>
